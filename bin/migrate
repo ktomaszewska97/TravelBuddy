@@ -1,0 +1,5 @@
+#!/bin/bash
+#flask db stamp heads
+flask db migrate
+flask db upgrade
+exec "$@"

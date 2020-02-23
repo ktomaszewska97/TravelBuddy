@@ -1,0 +1,85 @@
+/app/config/parameters.yml
+/build/
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+/vendor/
+/web/bundles/
+.idea/*
+.mysql-data/
+
+.DS_Store
+tmp/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# application specific
+tmp/
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+.env/
+build/
+develop-eggs/
+dist/
+*.egg-info
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
+lcov.info
+linecount.txt
+.mypy_cache
+
+.DS_Store
+.idea
+
+# user-defined custom .env overrides
+.env.*
+
+# artifacts
+projects.json
+repos/
+checks/
+public/
+downloads/
+stats/
+annotations/
+index.html
+
+# Local dev
+k8s
+.forge
+telepresence.log

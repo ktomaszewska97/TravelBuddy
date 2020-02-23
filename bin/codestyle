@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# All of the tools point to working directory, so remember to run this script from project root dir
+
+echo "============= Checking code formatting ============="
+./bin/black --check
+
+# RC 0 means nothing would change;
+# RC 1 means some files would be reformatted.
+# RC 123 means there was an internal error.
+rc_code=$?
+
+if [[ rc_code -ne 0 ]]; then
+    echo "***** some files needs to be formatted! >>> run ./bin/black script *****"
+    exit $rc_code
+fi
+
+echo "============== Checking imports order =============="
+./bin/isort --check
+
+rc_code=$?
+
+if [[ rc_code -ne 0 ]]; then
+    echo "***** some imports needs to be sorted!  >>> run ./bin/isort script *****"
+    exit $rc_code
+fi
+
+echo "============== Checking static typing =============="
+./bin/mypy || exit $?
+
+echo "=============== Checking code syntax ==============="
+./bin/pylint || exit $?
+
+
+echo ">>>>>>> AWSOME!  YOUR CODE HAS A NICE STYLE! <<<<<<<"

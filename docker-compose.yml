@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  db:
+    env_file:
+      - .env
+    image: mysql:latest
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    tmpfs:
+      - "/var/lib/mysql"
+    restart: always
+
+  web:
+    env_file:
+      - .env
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    container_name: travelbuddy-app
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+    command: "bash ./bin/waitforit db:3306 -- flask run"
+
+

@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+BLACK_VERSION="$(black --version | sed 's/, version//g')"
+RUN_BLACK="black -t py37 --line-length 100"
+SCOPE="."
+
+while test $# -gt 0; do
+    case "$1" in
+        --check)
+          RUN_BLACK="$RUN_BLACK --check"
+          shift;;
+        -*)
+          echo "Usage: ./bin/black [--check] [FILE1 FILE2 ...]"
+          echo "Error: no such option: $1"
+          exit 1;;
+        *)
+          SCOPE="$@"
+          break;;
+    esac
+done
+
+RUN_BLACK="$RUN_BLACK $SCOPE"
+
+echo "----> Running $BLACK_VERSION"
+$RUN_BLACK

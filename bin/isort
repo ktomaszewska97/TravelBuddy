@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+ISORT_VERSION="isort $(isort --version | grep 'VERSION' | sed -e 's/\(.*\)VERSION //g')"
+RUN_ISORT="isort -m 3 -w 100 -rc -tc"
+SCOPE="."
+
+while test $# -gt 0; do
+    case "$1" in
+        --check)
+          RUN_ISORT="$RUN_ISORT --check-only"
+          shift;;
+        -*)
+          echo "Usage: ./bin/isort [--check] [FILE1 FILE2 ...]"
+          echo "Error: no such option: $1"
+          exit 1;;
+        *)
+          SCOPE="$@"
+          break;;
+    esac
+done
+
+RUN_ISORT="$RUN_ISORT $SCOPE"
+
+echo "----> Running $ISORT_VERSION"
+$RUN_ISORT
